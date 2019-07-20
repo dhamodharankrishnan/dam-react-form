@@ -4,19 +4,43 @@
       First Name:
       <input type="text" formControlName="firstName">
     </label>
-  <br>
-  <br>
     <label>
       Last Name:
       <input type="text" formControlName="lastName">
     </label>
-
-    <br>
-    <br>
+    <div formGroupName="address">
+      <h3>Address</h3>
+    
+      <label>
+        Street:
+        <input type="text" formControlName="street">
+      </label>
+    
+      <label>
+        City:
+        <input type="text" formControlName="city">
+      </label>
+      
+      <label>
+        State:
+        <input type="text" formControlName="state">
+      </label>
+    
+      <label>
+        Zip Code:
+        <input type="text" formControlName="zip">
+      </label>
+    </div>
 
     <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+    <p>
+      <button (click)="updateProfile()">Update Profile</button>
+    </p>
+    
     <br>
     <br>
     <p>Form Model Value : {{ formModelValue }} </p>
-
+    <p>Form Model Value : {{ this.profileForm.value | json }} </p>
+    
   </form>
