@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-editor',
@@ -9,6 +9,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class ProfileEditorComponent implements OnInit {
 
   formModelValue = '';
+
+  phoneArrayItems: {
+    id: number,
+    areaCode: number,
+    extension: number
+  }[];
+
+/*
   profileForm = new FormGroup( {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -19,22 +27,46 @@ export class ProfileEditorComponent implements OnInit {
       zip: new FormControl()
     })
   });
+*/
 
-  constructor() { }
+constructor(private fb: FormBuilder) { }
+dates = [];
+
+profileForm = this.fb.group(
+  {
+    firstName: [''],
+    lastName: [''],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
+    }),
+    phoneArray: this.fb.array([])
+  }
+);
 
   ngOnInit() {
+
+    this.phoneArrayItems = [];
+
+    for( let index = 1; index <= 31; index++){
+      this.dates.push(index);
+    }
+  
 
     // To set values for all the controls in the form.
     this.profileForm.setValue(
       {
       firstName: 'Dhamo',
       lastName: 'Krish',
-      address: { street: 'Balaji', city: 'Perumalagaram', state: 'Karnataka', zip: 56001}
+      address: { street: 'Balaji', city: 'Perumalagaram', state: 'Karnataka', zip: 56001},
+      phoneArray: []
     }
     );
 
     // To set individual value in a form.
-    this.profileForm.controls.firstName.setValue('Suresh');
+   // this.profileForm.controls.firstName.setValue('Suresh');
 
 
   }
@@ -55,4 +87,42 @@ export class ProfileEditorComponent implements OnInit {
         }
     });
   }
+
+  get phoneArray() {
+    return this.profileForm.get('phoneArray') as FormArray;
+  }
+
+  addPhone() {
+    this.phoneArray.push(
+      this.fb.group(
+        {
+          id: [''],
+          areaCode: [''],
+          extension: ['']
+        }
+      )
+    );
+  }
+
+  deletePhone() {
+    // this.images.removeAt(this.images.value.findIndex(image => image.id === 502))
+    // this.phoneArray.removeAt(this.phoneArray.value)
+
+    // for (let phoneItem of this.phoneArray.controls) {
+    //   console.log('Id :'+ phoneItem.get('id').value );
+    //   console.log('AreaCode :'+ phoneItem.get('areaCode').value );
+    //   console.log('Extension :'+ phoneItem.get('extension').value );
+    //   if(phoneItem.get('id').value === true){
+    //     this.phoneArray.controls.
+    //   }
+    // }
+
+    this.phoneArray.controls.forEach( function (phoneGroupItem, phoneIndex) {
+      console.log(phoneGroupItem.get('id').value);
+      // this.phoneArray.removeAt(phoneIndex);
+    });
+
+    this.phoneArray.removeAt(this.phoneArray.controls.findIndex( phoneItem => phoneItem.get('id').value === true));
+  
+   }
 }

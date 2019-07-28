@@ -32,6 +32,26 @@
       </label>
     </div>
 
+    <br>
+    <br>
+    <!-- formArrayName is the component name initialized in the formGroup. -->
+    <!-- phoneArrayItems is the arrayItem defined with the data structure of the form group elements in the array . -->
+    <div formArrayName="phoneArray"  >
+        <h3>Phone Numbers:</h3> 
+        <button (click)="addPhone()">Add Phone</button>
+        <button (click)="deletePhone()">Delete Phone</button>
+
+      <div *ngFor="let phoneArrayItem of phoneArray.controls; let phoneIndex=index" >
+        <!-- The formgroup name inside the form array is named with the index of the formArray -->
+        <div [formGroupName]="phoneIndex">
+            <input type="checkbox" formControlName="id" />
+            <input type="text" formControlName="areaCode" />
+            <input type="text" formControlName="extension" />
+          </div>
+      </div>
+ 
+    </div>
+<br>
     <button type="submit" [disabled]="!profileForm.valid">Submit</button>
 
     <p>
