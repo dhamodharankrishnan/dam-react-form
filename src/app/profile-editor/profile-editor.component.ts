@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-editor',
@@ -34,7 +35,7 @@ dates = [];
 
 profileForm = this.fb.group(
   {
-    firstName: [''],
+    firstName: new FormControl('', [Validators.required, Validators.minLength(8)]),
     lastName: [''],
     address: this.fb.group({
       street: [''],
@@ -61,7 +62,7 @@ profileForm = this.fb.group(
       firstName: 'Dhamo',
       lastName: 'Krish',
       address: { street: 'Balaji', city: 'Perumalagaram', state: 'Karnataka', zip: 56001},
-      phoneArray: []
+      phoneArray: [{id: 1, areaCode: 224, extension: 7039966}]
     }
     );
 

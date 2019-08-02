@@ -1,66 +1,66 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    
-    <label>
-      First Name:
-      <input type="text" formControlName="firstName">
-    </label>
-    <label>
-      Last Name:
-      <input type="text" formControlName="lastName">
-    </label>
-    <div formGroupName="address">
-      <h3>Address</h3>
-    
-      <label>
-        Street:
-        <input type="text" formControlName="street">
-      </label>
-    
-      <label>
-        City:
-        <input type="text" formControlName="city">
-      </label>
-      
-      <label>
-        State:
-        <input type="text" formControlName="state">
-      </label>
-    
-      <label>
-        Zip Code:
-        <input type="text" formControlName="zip">
-      </label>
-    </div>
 
-    <br>
-    <br>
-    <!-- formArrayName is the component name initialized in the formGroup. -->
-    <!-- phoneArrayItems is the arrayItem defined with the data structure of the form group elements in the array . -->
-    <div formArrayName="phoneArray"  >
-        <h3>Phone Numbers:</h3> 
-        <button (click)="addPhone()">Add Phone</button>
-        <button (click)="deletePhone()">Delete Phone</button>
+  <label>
+    First Name:
+    <input id="firstName" type="text" formControlName="firstName" required/>
+  </label>
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName">
+  </label>
+  <div formGroupName="address">
+    <h3>Address</h3>
 
-      <div *ngFor="let phoneArrayItem of phoneArray.controls; let phoneIndex=index" >
-        <!-- The formgroup name inside the form array is named with the index of the formArray -->
-        <div [formGroupName]="phoneIndex">
-            <input type="checkbox" formControlName="id" />
-            <input type="text" formControlName="areaCode" />
-            <input type="text" formControlName="extension" />
-          </div>
+    <label>
+      Street:
+      <input type="text" formControlName="street">
+    </label>
+
+    <label>
+      City:
+      <input type="text" formControlName="city">
+    </label>
+
+    <label>
+      State:
+      <input type="text" formControlName="state">
+    </label>
+
+    <label>
+      Zip Code:
+      <input type="text" formControlName="zip">
+    </label>
+  </div>
+
+  <br>
+  <br>
+  <!-- formArrayName is the component name initialized in the formGroup. -->
+  <!-- phoneArrayItems is the arrayItem defined with the data structure of the form group elements in the array . -->
+  <div formArrayName="phoneArray">
+    <h3>Phone Numbers:</h3>
+    <button (click)="addPhone()">Add Phone</button>
+    <button (click)="deletePhone()">Delete Phone</button>
+
+    <div *ngFor="let phoneArrayItem of phoneArray.controls; let phoneIndex=index">
+      <!-- The formgroup name inside the form array is named with the index of the formArray -->
+      <div [formGroupName]="phoneIndex">
+        <input type="checkbox" formControlName="id" />
+        <input type="text" formControlName="areaCode" />
+        <input type="text" formControlName="extension" />
       </div>
- 
     </div>
-<br>
-    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
 
-    <p>
-      <button (click)="updateProfile()">Update Profile</button>
-    </p>
-    
-    <br>
-    <br>
-    <p>Form Model Value : {{ formModelValue }} </p>
-    <p>Form Model Value : {{ this.profileForm.value | json }} </p>
-    
-  </form>
+  </div>
+  <br>
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+  <p>
+    <button (click)="updateProfile()">Update Profile</button>
+  </p>
+
+  <br>
+  <br>
+  <p>Form Model Value : {{ formModelValue }} </p>
+  <p>Form Model Value : {{ this.profileForm.value | json }} </p>
+
+</form>
