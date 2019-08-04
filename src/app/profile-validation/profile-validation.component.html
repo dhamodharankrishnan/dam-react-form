@@ -1,13 +1,23 @@
 <form [formGroup]="profileValidationForm" (ngSubmit)="onSubmit()">
-        <input id="firstName" type="text" formControlName="firstName"/>
+<label for="firstName"> First Name :</label>
+  <input id="firstName" type="text" formControlName="firstName" />
 
-      <div *ngIf="profileValidationForm.invalid"
-        class="alert alert-danger">
-        <div *ngIf="firstName.errors?.lengthValidation">
-                Name is required.
-              </div>
-              <div *ngIf="firstName.errors?.maxlength">
-                    Length of Name is more than 10 chars.
-                  </div>
-        </div>
+  <div *ngIf="profileValidationForm.invalid" class="alert alert-danger">
+    <div *ngIf="firstName.errors?.lengthValidation">
+      Name is required.
+    </div>
+    <!-- ControlName.errors?.errorAttributeName -->
+    <div *ngIf="firstName.errors?.maxlength">
+      Length of Name is more than 10 chars.
+    </div>
+    <div *ngIf="firstName.errors?.minlength">
+      Length of Name is lesser than 5 chars.
+    </div>
+  </div>
+  <!--
+  <div *ngIf=“getField.errors” class=“invalid-feedback”>
+    <div *ngIf=“getField.hasError(‘required’)”> Text required </div>
+    <div *ngIf=“getField.hasError(‘maxlength’)”> Text maxLength </div>
+  </div>
+-->
 </form>

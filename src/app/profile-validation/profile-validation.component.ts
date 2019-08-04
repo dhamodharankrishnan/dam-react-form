@@ -12,7 +12,10 @@ export class ProfileValidationComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
   profileValidationForm = this.fb.group(
     {
-          firstName: new FormControl('', [Validators.required, Validators.maxLength(10)])
+          firstName: new FormControl('',
+                  [Validators.required,
+                  Validators.minLength(5),
+                    Validators.maxLength(10)])
     }
   );
 
@@ -24,3 +27,5 @@ export class ProfileValidationComponent implements OnInit {
   }
 
 }
+
+// Customization.
