@@ -107,10 +107,9 @@ profileForm = this.fb.group(
 
     this.phoneArray.controls.forEach( function (phoneGroupItem, phoneIndex) {
       console.log(phoneGroupItem.get('id').value);
-      // this.phoneArray.removeAt(phoneIndex);
     });
 
     this.phoneArray.removeAt(this.phoneArray.controls.findIndex( phoneItem => phoneItem.get('id').value === true));
-  
+    
    }
 }
